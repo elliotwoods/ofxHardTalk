@@ -6,9 +6,9 @@ namespace ofxHardTalk {
 	namespace Serialiser {
 		class ofPixelsSerialiser : public Base {
 		public:
-			std::type_info getHandledType() override;
-			void serialise(ofxHardTalk::Buffer &, void * object) override;
-			void deSerialise(ofxHardTalk::Buffer &, void * object) override;
+			const std::type_info & getHandledType() const override;
+			void put(ofxHardTalk::Buffer &, const void * object) const override;
+			bool get(ofxHardTalk::Buffer &, void * object) const override;
 		};
 	}
 }

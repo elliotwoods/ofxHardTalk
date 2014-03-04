@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B3754FF18C5F4740041FEDF /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B3754FE18C5F4740041FEDF /* Buffer.cpp */; };
 		8BA0693B18C6370B009CBAA1 /* Set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0693A18C6370B009CBAA1 /* Set.cpp */; };
+		8BA0693D18C64065009CBAA1 /* ofPixelsSerialiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0693C18C64065009CBAA1 /* ofPixelsSerialiser.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -69,6 +70,7 @@
 		8B37550618C60B770041FEDF /* ofPixelsSerialiser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofPixelsSerialiser.h; path = ../src/ofxHardTalk/Serialiser/ofPixelsSerialiser.h; sourceTree = "<group>"; };
 		8BA0693918C6366D009CBAA1 /* Set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Set.h; path = ../src/ofxHardTalk/Serialiser/Set.h; sourceTree = "<group>"; };
 		8BA0693A18C6370B009CBAA1 /* Set.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Set.cpp; path = ../src/ofxHardTalk/Serialiser/Set.cpp; sourceTree = "<group>"; };
+		8BA0693C18C64065009CBAA1 /* ofPixelsSerialiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofPixelsSerialiser.cpp; path = ../src/ofxHardTalk/Serialiser/ofPixelsSerialiser.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				8B37550618C60B770041FEDF /* ofPixelsSerialiser.h */,
+				8BA0693C18C64065009CBAA1 /* ofPixelsSerialiser.cpp */,
 				8B37550418C60ABA0041FEDF /* Base.h */,
 				8BA0693918C6366D009CBAA1 /* Set.h */,
 				8BA0693A18C6370B009CBAA1 /* Set.cpp */,
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA0693D18C64065009CBAA1 /* ofPixelsSerialiser.cpp in Sources */,
 				8BA0693B18C6370B009CBAA1 /* Set.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				8B3754FF18C5F4740041FEDF /* Buffer.cpp in Sources */,

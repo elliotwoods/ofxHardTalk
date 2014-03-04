@@ -70,36 +70,12 @@ namespace ofxHardTalk {
 			this->reserved = 0;
 			this->readPosition = 0;
 		}
-	}
+	}	
 	
 	//----------
-	void Buffer::serialise(const void * data, size_t objectSize, const type_info & type) {
-		const auto typeString = string(type.name());
-		this->put((TypeLength) typeString.length());
-		this->put(& typeString[0], typeString.length());
-		this->put(data, objectSize);
+	void * Buffer::getPtr() {
+		return this->data;
 	}
-	
-	//----------
-	bool Buffer::deSerialise(void * data, size_t objectSize, const type_info & type) {
-		const auto targetTypeString = string(type.name());
-		
-		//check the type
-		if (this->checkPeekTypeName(type.name())) {
-			return false;
-		} else {
-			this->moveReadHead(sizeof(TypeLength) + targetTypeString.length());
-		}
-		
-		//check if can pull the data
-		if(this->remainingReadSpace() < objectSize) {
-			return false;
-		}
-		
-		//pull the data
-		this->get(data, objectSize);
-	}
-	
 	
 	//----------
 	void * Buffer::getWriteHead() {
@@ -109,6 +85,11 @@ namespace ofxHardTalk {
 	//----------
 	const void * Buffer::getReadHead() const {
 		return this->data + this->readPosition;
+	}
+	
+	//----------
+	size_t Buffer::getSize() const {
+		return this->size;
 	}
 							   
 	//----------
@@ -134,12 +115,12 @@ namespace ofxHardTalk {
 	}
 
 	//----------
-	bool Buffer::get(void * data, size_t objectSize) {
+	bool Buffer::get(void * objectData, size_t objectSize) {
 		if(this->readPosition + objectSize > this->size) {
 			return false;
 		}
-		memcpy(data, this->getReadHead(), objectSize);
-		this->readPosition += objectSize;
+		memcpy(objectData, this->getReadHead(), objectSize);
+		this->moveReadHead(objectSize);
 		return true;
 	}
 	
@@ -151,5 +132,16 @@ namespace ofxHardTalk {
 		auto typeLength = this->peek<TypeLength>();
 		
 		return strcmp((char *) (this->data + sizeof(TypeLength)), name);
+	}
+	
+	//-----------
+	ostream & operator<<(ostream & os, const Buffer & buffer) {
+		os << "{";
+		auto readHeader = (unsigned char * const) buffer.data;
+		for(int i=0; i<buffer.size; i++) {
+			os << (int) readHeader[i] << ", ";
+		}
+		os << "}";
+		return os;
 	}
 }

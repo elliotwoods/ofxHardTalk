@@ -7,9 +7,13 @@ void ofApp::setup(){
 	int input = 0;
 	buffer << input;
 	
+	cout << buffer << endl;
+	
 	int output;
 	buffer >> output;
-	cout << output;
+
+	cout << buffer << endl;
+	cout << output << endl;
 }
 
 //--------------------------------------------------------------
