@@ -1,5 +1,6 @@
 #include "Buffer.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -36,6 +37,9 @@ namespace ofxHardTalk {
 			delete[] this->data;
 		}
 		
+		//use the new memory location
+		this->data = newData;
+		
 		//remember how much data we have reserved
 		this->reserved = size;
 	}
@@ -69,42 +73,31 @@ namespace ofxHardTalk {
 	}
 	
 	//----------
-	void Buffer::serialise(void * data, size_t size, const type_info & type) {
+	void Buffer::serialise(const void * data, size_t objectSize, const type_info & type) {
 		const auto typeString = string(type.name());
 		this->put((TypeLength) typeString.length());
 		this->put(& typeString[0], typeString.length());
-		this->put(data, size);
+		this->put(data, objectSize);
 	}
 	
 	//----------
-	bool Buffer::deSerialise(void * data, size_t size, const type_info & type) {
+	bool Buffer::deSerialise(void * data, size_t objectSize, const type_info & type) {
 		const auto targetTypeString = string(type.name());
-		const auto typeLength = this->peek<TypeLength>();
 		
-		//check the length of the type
-		if(typeLength != targetTypeString.length()) {
+		//check the type
+		if (this->checkPeekTypeName(type.name())) {
 			return false;
 		} else {
-			this->moveReadHead(sizeof(TypeLength));
+			this->moveReadHead(sizeof(TypeLength) + targetTypeString.length());
 		}
 		
-		string sourceTypeString;
-		sourceTypeString.resize(typeLength);
-		memcpy(& sourceTypeString[0], this->getReadHead(), typeLength);
-		
-		(targetTypeString.length());
-		
-		if (this->remainingReadSpace() < sizeof(type_info)) {
+		//check if can pull the data
+		if(this->remainingReadSpace() < objectSize) {
 			return false;
 		}
-		if(* (const type_info *) this->getReadHead() == type) {
-			this->moveReadHead(sizeof(type_info));
-			if (!this->get(data, size)) {
-				this->readPosition -= sizeof(type_info);
-			}
-		} else {
-			return false;
-		}
+		
+		//pull the data
+		this->get(data, objectSize);
 	}
 	
 	
@@ -137,7 +130,7 @@ namespace ofxHardTalk {
 	void Buffer::put(const void * data, size_t objectSize) {
 		this->checkSpace(this->size + objectSize);
 		memcpy(this->getWriteHead(), data, objectSize);
-		this->size += size;
+		this->size += objectSize;
 	}
 
 	//----------
@@ -148,5 +141,15 @@ namespace ofxHardTalk {
 		memcpy(data, this->getReadHead(), objectSize);
 		this->readPosition += objectSize;
 		return true;
+	}
+	
+	//-----------
+	bool Buffer::checkPeekTypeName(const char * name) {
+		if (this->remainingReadSpace() < sizeof(TypeLength)) {
+			return false;
+		}
+		auto typeLength = this->peek<TypeLength>();
+		
+		return strcmp((char *) (this->data + sizeof(TypeLength)), name);
 	}
 }

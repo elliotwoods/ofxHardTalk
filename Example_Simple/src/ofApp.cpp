@@ -2,7 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	cout << sizeof(type_info);
+	ofxHardTalk::Buffer buffer;
+	
+	int input = 0;
+	buffer << input;
+	
+	int output;
+	buffer >> output;
+	cout << output;
 }
 
 //--------------------------------------------------------------

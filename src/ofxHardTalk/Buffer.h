@@ -1,8 +1,9 @@
 #pragma once
+
+#include "Serialiser/Set.h"
+
 #include <cstddef>
 #include <typeinfo>
-
-#include "Serialisable.h"
 
 namespace ofxHardTalk {	
 	class Buffer {
@@ -22,30 +23,26 @@ namespace ofxHardTalk {
 		//--
 		// Managed serialisation functions
 		//
-		void serialise(void * data, size_t size, const std::type_info &);
-		bool deSerialise(void * data, size_t size, const std::type_info &);
+		void serialise(const void * data, size_t objectSize, const std::type_info &);
+		bool deSerialise(void * data, size_t objectSize, const std::type_info &);
 		
 		template<typename T>
 		Buffer & operator<<(const T & data) {
-			auto asSerialisable = static_cast<Serialisable*>(&data);
-			if (asSerialisable) {
-				//use its own serialiser
-				asSerialisable->serialise(*this);
+			auto serialiser = Serialiser::Set::Singleton.getSerialiser<T>();
+			if (serialiser) {
+				serialiser->serialise(* this, & data);
 			} else {
-				//use our serialise
-				this->serialise(&data, sizeof(T), typeid(data));
+				this->serialise(& data, sizeof(T), typeid(T));
 			}
 		}
 		
 		template<typename T>
-		Buffer & operator>>(const T & data) {
-			auto asSerialisable = static_cast<Serialisable*>(&data);
-			if (asSerialisable) {
-				//use its own serialiser
-				asSerialisable->deSerialise(*this);
+		Buffer & operator>>(T & data) {
+			auto serialiser = Serialiser::Set::Singleton.getSerialiser<T>();
+			if (serialiser) {
+				serialiser->deSerialise(* this, & data);
 			} else {
-				//use our serialise
-				this->deSerialise(&data, sizeof(T), typeid(data));
+				this->deSerialise(& data, sizeof(T), typeid(T));
 			}
 		}
 		//
@@ -57,14 +54,29 @@ namespace ofxHardTalk {
 		//
 		void * getWriteHead();
 		const void * getReadHead() const;
+		
 		void moveReadHead(size_t);
+		template<typename T>
+		void moveReadHead() {
+			this->moveReadHead(sizeof(T));
+		}
+		
 		void moveWriteHead(size_t);
+		template<typename T>
+		void moveWriteHead() {
+			this->moveWriteHead(sizeof(T));
+		}
+		
 		size_t remainingReadSpace() const;
 		
 		void put(const void *, size_t);
 		template<typename T>
 		void put(const T & object) {
 			this->put(& object, sizeof(T));
+		}
+		template<typename T>
+		void putTypeName() {
+			this->put((TypeLength) sizeof(T));
 		}
 		
 		bool get(void *, size_t);
@@ -76,6 +88,12 @@ namespace ofxHardTalk {
 		template<typename T>
 		T & peek() {
 			return * (T *) this->getReadHead();
+		}
+		
+		bool checkPeekTypeName(const char *);
+		template<typename T>
+		bool checkPeekTypeName() {
+			this->checkPeekTypeName(typeid(T).name());
 		}
 		//
 		//--

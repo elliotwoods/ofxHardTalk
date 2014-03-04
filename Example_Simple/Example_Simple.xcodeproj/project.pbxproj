@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B3754FF18C5F4740041FEDF /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B3754FE18C5F4740041FEDF /* Buffer.cpp */; };
+		8BA0693B18C6370B009CBAA1 /* Set.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0693A18C6370B009CBAA1 /* Set.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -63,10 +64,11 @@
 /* Begin PBXFileReference section */
 		8B3754FD18C5F44D0041FEDF /* Buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = ../src/ofxHardTalk/Buffer.h; sourceTree = "<group>"; };
 		8B3754FE18C5F4740041FEDF /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../src/ofxHardTalk/Buffer.cpp; sourceTree = "<group>"; };
-		8B37550018C609D30041FEDF /* Serialisable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Serialisable.h; path = ../src/ofxHardTalk/Serialisable.h; sourceTree = "<group>"; };
 		8B37550118C60A180041FEDF /* ofxHardTalk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofxHardTalk.h; path = ../src/ofxHardTalk.h; sourceTree = "<group>"; };
 		8B37550418C60ABA0041FEDF /* Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Base.h; path = ../src/ofxHardTalk/Serialiser/Base.h; sourceTree = "<group>"; };
 		8B37550618C60B770041FEDF /* ofPixelsSerialiser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofPixelsSerialiser.h; path = ../src/ofxHardTalk/Serialiser/ofPixelsSerialiser.h; sourceTree = "<group>"; };
+		8BA0693918C6366D009CBAA1 /* Set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Set.h; path = ../src/ofxHardTalk/Serialiser/Set.h; sourceTree = "<group>"; };
+		8BA0693A18C6370B009CBAA1 /* Set.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Set.cpp; path = ../src/ofxHardTalk/Serialiser/Set.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -136,7 +138,6 @@
 				8B37550318C60AA40041FEDF /* Serialiser */,
 				8B3754FD18C5F44D0041FEDF /* Buffer.h */,
 				8B3754FE18C5F4740041FEDF /* Buffer.cpp */,
-				8B37550018C609D30041FEDF /* Serialisable.h */,
 			);
 			name = ofxHardTalk;
 			sourceTree = "<group>";
@@ -146,6 +147,8 @@
 			children = (
 				8B37550618C60B770041FEDF /* ofPixelsSerialiser.h */,
 				8B37550418C60ABA0041FEDF /* Base.h */,
+				8BA0693918C6366D009CBAA1 /* Set.h */,
+				8BA0693A18C6370B009CBAA1 /* Set.cpp */,
 			);
 			name = Serialiser;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA0693B18C6370B009CBAA1 /* Set.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				8B3754FF18C5F4740041FEDF /* Buffer.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
